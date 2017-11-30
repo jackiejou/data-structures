@@ -1,27 +1,33 @@
 var Queue = function() {
-  var queue = {
-  	position: 0,
-  	storage: {}
-  };
+  var instance = {};
+  instance.storage = {};
+  instance.index = 0;
 
-  _.extend(queue, queueMethods);
-
-  return queue;
+  _.extend(instance, queueMethods);
+  
+  return instance;
 };
 
-var queueMethods = {
-  dequeue: function() {
-  	var item = this.storage[Object.keys(this.storage)[0]];
-  	delete this.storage[Object.keys(this.storage)[0]];
-  	return item;
-  },
-  enqueue: function(value) {
-  	this.position++;
-  	this.storage[this.position] = value;
-  },
-  size: function() {
-  	return Object.keys(this.storage).length;
-  }
+var queueMethods = {};
+
+queueMethods.enqueue = function(value) {
+  // add value at index key inside storage
+  // increment index 
+  this.storage[this.index] = value;
+  this.index++;
 };
 
+queueMethods.dequeue = function() {
+  // get first object key and value
+  // delete the value pair in storage
+  // return the value
+  var firstKey = Object.keys(this.storage)[0];
+  var firstValue = this.storage[firstKey];
+  delete this.storage[firstKey];
+  return firstValue;
+};
 
+queueMethods.size = function() {
+  // return the length of the object keys in storage
+  return Object.keys(this.storage).length;
+};
