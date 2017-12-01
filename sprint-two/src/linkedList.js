@@ -44,6 +44,26 @@ var LinkedList = function() {
     // return false if not found
     return false;
   };
+  
+  // for the new test created
+
+  list.addToBody = function(valueToAdd, valueToAddOnto) {
+    var currentNode = list.head;
+    // do while loop with condition as currentNode does not equal null    
+    do {
+      // check if currentNode value is equal to valuetoadd
+      if (currentNode.value === valueToAddOnto) {
+        // create new node
+        var newNode = new Node(valueToAdd);
+        // set the new node to reference the node after the current node
+        newNode.next = currentNode.next;
+        // have currentnode.next reference the new node
+        currentNode.next = newNode;
+      }
+      // else reassign currentNode to next
+      currentNode = currentNode.next;
+    } while (currentNode);
+  };
   return list;
 };
 

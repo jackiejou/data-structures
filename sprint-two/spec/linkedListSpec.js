@@ -52,4 +52,11 @@ describe('linkedList', function() {
   });
 
   // add more tests here to test the functionality of linkedList
+  
+  it('should contain a value that was added in the body after a specific node', function() {
+    linkedList.addToTail(4);
+    linkedList.addToTail(6);
+    linkedList.addToBody(5, 4);
+    expect(linkedList.contains(5)).to.equal(true);
+  });
 });
