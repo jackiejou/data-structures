@@ -36,6 +36,25 @@ treeMethods.contains = function(target) {
   return false;
 };
 
+// new function for new test below
+
+treeMethods.removeChild = function(value) {
+  // check if children length > 0
+  if (this.children.length > 0) {
+    // loop through each of the children
+    for (var i = 0; i < this.children.length; i++) {
+      // if so, recursively call this function
+      if (this.children[i].value === value) {
+        this.children.splice(i, 1);
+      } else {
+        if (this.children[i]) {
+          this.children[i].removeChild(value);
+        }
+      }
+    }    
+  } 
+};
+
 /*
   Complexity: What is the time complexity of the above functions? 
     addChild is O(1)
