@@ -3,6 +3,7 @@ var Queue = function() {
   instance.storage = {};
   instance.index = 0;
 
+  // extend Queue with queueMethods
   _.extend(instance, queueMethods);
   
   return instance;
@@ -12,18 +13,19 @@ var queueMethods = {};
 
 queueMethods.enqueue = function(value) {
   // add value at index key inside storage
-  // increment index 
   this.storage[this.index] = value;
+  // increment index
   this.index++;
 };
 
 queueMethods.dequeue = function() {
   // get first object key and value
-  // delete the value pair in storage
-  // return the value
   var firstKey = Object.keys(this.storage)[0];
+  // save the value into a variable
   var firstValue = this.storage[firstKey];
+  // delete the value pair in storage
   delete this.storage[firstKey];
+  // return the saved variable
   return firstValue;
 };
 

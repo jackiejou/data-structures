@@ -5,19 +5,19 @@ var Queue = function() {
 
 Queue.prototype.enqueue = function(value) {
   // saving the value into storage with key index
-  // increment index
   this.storage[this.index] = value;
+  // increment index
   this.index++;
 };
 
 Queue.prototype.dequeue = function() {
   // get first key value pair from storage
   // save those key value pairs as variables
-  // delete key value pairs from storage
-  // return key value pair
   var firstKey = Object.keys(this.storage)[0];
   var firstValue = this.storage[firstKey];
+  // delete key value pairs from storage
   delete this.storage[firstKey];
+  // return value variable
   return firstValue;
 };
 

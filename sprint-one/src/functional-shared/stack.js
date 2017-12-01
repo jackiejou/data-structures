@@ -1,13 +1,9 @@
 var Stack = function() {
-  // Hey! Rewrite in the new style. Your code will wind up looking very similar,
-  // but try not not reference your old code in writing the new style.
+  var instance = {};
+  instance.storage = {},
+  instance.index = 0;
   
-  var instance = {
-    storage: {},
-    index: 0
-  };
-  
-
+  // extend Stack with stackMethods
   _.extend(instance, stackMethods);
 
   return instance;
@@ -17,20 +13,21 @@ stackMethods = {};
 
 stackMethods.push = function(value) {
   // push value into storage at key index
-  // increment index
   this.storage[this.index] = value;
+  // increment index
   this.index++;
 };
 
 stackMethods.pop = function() {
   // get last storage key
-  // delete the key value pair for that last key
-  // decrement index
-  // return the value
   var lastKey = Object.keys(this.storage)[this.index - 1];
+  // save the last value as a variable
   var lastValue = this.storage[lastKey];
+  // delete the key value pair for that last key
   delete this.storage[lastKey];
+  // decrement index
   this.index--;
+  // return the saved variable
   return lastValue;
 };
 
