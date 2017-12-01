@@ -25,5 +25,8 @@ setPrototype.remove = function(item) {
 };
 
 /*
- * Complexity: What is the time complexity of the above functions? O(n)
- */
+  Complexity: What is the time complexity of the above functions?
+    add is O(n)
+    contains is O(n)
+    remove is O(n)
+*/
