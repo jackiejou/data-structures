@@ -36,8 +36,6 @@ treeMethods.contains = function(target) {
   return false;
 };
 
-
-
 /*
   Complexity: What is the time complexity of the above functions? 
     addChild is O(1)

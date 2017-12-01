@@ -5,41 +5,43 @@ var LinkedList = function() {
 
   list.addToTail = function(value) {
     // create a new node and assign value to the paramenter
-    // if head is not referencing any value, then reference the new node, and reference  tail to the same node
-    // else, have the existing tail node reference new node and then reassign tail to the new node
     var newNode = new Node (value);
+    // if head is not referencing any value,
     if (!list.head) {
+      // then reference the new node
       list.head = newNode;
+      // reference tail to the same node
       list.tail = newNode;
     } else {
+      // else, have the existing tail node reference new node 
       list.tail.next = newNode;
+      // and reassign tail to the new node
       list.tail = newNode;
     }
   };
 
   list.removeHead = function() {
     // create variable to hold head node value
-    // reassign head to head.next node
-    // return variable
     var headValue = list.head.value;
+    // reassign head to head.next node
     list.head = list.head.next;
+    // return variable
     return headValue;
   };
 
   list.contains = function(target) {
     // create a current node variable and assign to head
-    // do while loop with condition as currentNode does not equal null
-      // check if currentNode value is equal to target
-      // else reassign currentNode to next
-    // return false if not found
     var currentNode = list.head;
-    
+    // do while loop with condition as currentNode does not equal null    
     do {
+      // check if currentNode value is equal to target
       if (currentNode.value === target) {
         return true;
       }
+      // else reassign currentNode to next
       currentNode = currentNode.next;
     } while (currentNode);
+    // return false if not found
     return false;
   };
   return list;

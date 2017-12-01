@@ -8,8 +8,8 @@ var setPrototype = {};
 
 setPrototype.add = function(item) {
   // check if item exists in storage
-    // if not, push item in storage
   if (!this.contains(item)) {
+    // if not, push item in storage
     this.storage.push(item);
   }
 };
