@@ -60,6 +60,9 @@ HashTable.prototype.remove = function(k) {
 
 /*
  * Complexity: What is the time complexity of the above functions?
+    insert runs in O(n) in respect to the number of tuples in the hash table
+    retrieve runs in O(n) in respect to the number of tuples in the hash table
+    remove runs in O(n) in respect to the number of tuples in the hash table
  */
 
 
