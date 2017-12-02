@@ -24,4 +24,14 @@ describe('set', function() {
     expect(set.contains('Mel Gibson')).to.equal(false);
   });
 
+  // new test
+  
+  it('should return all values from a set', function() {
+    set.add('Ryan');
+    set.add('Jackie');
+    set.add('Mel');
+    set.add('Danny');
+    expect(set.getSetList()).to.eql(['Ryan', 'Jackie', 'Danny']);
+  });
+
 });

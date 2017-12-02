@@ -67,6 +67,12 @@ Graph.prototype.forEachNode = function(cb) {
   }
 };
 
+// new test
+
+Graph.prototype.countEdges = function(node) {
+  return this.edges[node].length;
+};
+
 /*
   Complexity: What is the time complexity of the above functions? 
     addNode is O(1)

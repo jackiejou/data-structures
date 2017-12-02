@@ -28,7 +28,19 @@ setPrototype.remove = function(item) {
   delete this.storage[index];
 };
 
+// new test
 
+setPrototype.getSetList = function() {
+  var result = [];
+  var arrayOfKeys = Object.keys(this.storage); 
+  for (var i = 0; i < arrayOfKeys.length; i++) {
+    var value = this.storage[arrayOfKeys[i]];
+    if (typeof value === 'string') {
+      result.push(value);
+    }
+  }
+  return result;
+};
 
 /*
   Complexity: What is the time complexity of the above functions?
