@@ -3,7 +3,6 @@ var Stack = function() {
   instance.storage = {},
   instance.index = 0;
   
-  // extend Stack with stackMethods
   _.extend(instance, stackMethods);
 
   return instance;
@@ -12,22 +11,19 @@ var Stack = function() {
 stackMethods = {};
 
 stackMethods.push = function(value) {
-  // push value into storage at key index
+  // push value into storage at current index and increment index
   this.storage[this.index] = value;
-  // increment index
   this.index++;
 };
 
 stackMethods.pop = function() {
-  // get last storage key
+  // save the last key and values from storage as variables
   var lastKey = Object.keys(this.storage)[this.index - 1];
-  // save the last value as a variable
   var lastValue = this.storage[lastKey];
-  // delete the key value pair for that last key
+
+  // delete the key value pair from storage, decrement index, and return last value
   delete this.storage[lastKey];
-  // decrement index
   this.index--;
-  // return the saved variable
   return lastValue;
 };
 

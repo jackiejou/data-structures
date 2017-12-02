@@ -4,20 +4,17 @@ var Stack = function() {
 };
 
 Stack.prototype.push = function(value) {
-  // save the value inside storage with index key
-  // increment index
+  // save the value inside storage with current index and increment index
   this.storage[this.index] = value;
   this.index++;
 };
 
 Stack.prototype.pop = function() {
-  // get the last keyvalue pairs from storage
-  // save them as two variables
-  // delete the last keyvalue pair
-  // decrement index
-  // return value 
+  // save last key and value as variables
   var lastKey = Object.keys(this.storage)[this.index - 1];
   var lastValue = this.storage[lastKey];
+
+  // delete the last key value pair, decrement index, and return last value
   delete this.storage[lastKey];
   this.index--;
   return lastValue;

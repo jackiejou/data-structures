@@ -9,20 +9,18 @@ var Queue = function() {
 var queueMethods = {};
 
 queueMethods.enqueue = function(value) {
-  // store value into storage at index key
+  // store value into storage at current index and increment index
   this.storage[this.index] = value;
-  // increment index 
   this.index++;
 };
 
 queueMethods.dequeue = function() {
-  // find first object key and value
-  // save key and value into two variables
+  // save first key and value into two variables
   var firstKey = Object.keys(this.storage)[0];
   var firstValue = this.storage[firstKey];
-  // delete key value from storage
+
+  // delete key value from storage and return first value
   delete this.storage[firstKey];
-  // return value variable
   return firstValue;
 };
 

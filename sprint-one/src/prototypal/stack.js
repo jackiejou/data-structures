@@ -9,21 +9,19 @@ var Stack = function() {
 var stackMethods = {};
 
 stackMethods.push = function(value) {
-  // save value at storage at index key
+  // save value at storage at current index and increment index
   this.storage[this.index] = value;
-  // increment index
   this.index++;
 };
 
 stackMethods.pop = function() {
-  // get last key value from storage and save as two variables
+  // save last key and value from storage as variables
   var lastKey = Object.keys(this.storage)[this.index - 1];
   var lastValue = this.storage[lastKey];
-  // delete last key value pair from storage
+
+  // delete last key value pair from storage, deecrement index, and return last value
   delete this.storage[lastKey];
-  // decrement index
   this.index--;
-  // return lastValue
   return lastValue;
 };
 

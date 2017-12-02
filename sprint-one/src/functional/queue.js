@@ -1,24 +1,21 @@
 var Queue = function() {
   var someInstance = {};
-  // Use an object with numeric keys to store values
   var storage = {};
   var index = 0;
 
   someInstance.enqueue = function(value) {
-    // add new element of object into storage,
+    // add value into storage at current index, and then increment index
     storage[index] = value;
-    // increment index after new item is added
     index++;
   };
 
   someInstance.dequeue = function() {
-    // get the positions of the items of the storage and get the 0th position key
+    // save the first key and value as variables
     var firstKey = Object.keys(storage)[0];
-    // store the value in a variable
     var firstValue = storage[firstKey];
-    // delete that key value pair
+
+    // delete from storage and then return the saved value
     delete storage[firstKey];
-    // return the saved variable
     return firstValue;
   };
 
