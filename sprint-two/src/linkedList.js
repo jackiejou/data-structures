@@ -4,66 +4,63 @@ var LinkedList = function() {
   list.tail = null;
 
   list.addToTail = function(value) {
-    // create a new node and assign value to the paramenter
     var newNode = new Node (value);
-    // if head is not referencing any value,
+    // if head is not referencing any value, reference head and tail to the new node
     if (!list.head) {
-      // then reference the new node
       list.head = newNode;
-      // reference tail to the same node
       list.tail = newNode;
     } else {
-      // else, have the existing tail node reference new node 
+      // else, have the existing tail node reference new node and reassign tail to the new node
       list.tail.next = newNode;
-      // and reassign tail to the new node
       list.tail = newNode;
     }
   };
 
   list.removeHead = function() {
     // create variable to hold head node value
+    // reassign head to the next node
     var headValue = list.head.value;
-    // reassign head to head.next node
     list.head = list.head.next;
-    // return variable
     return headValue;
   };
 
   list.contains = function(target) {
-    // create a current node variable and assign to head
+    // start at head node for looping
     var currentNode = list.head;
-    // do while loop with condition as currentNode does not equal null    
+
+    // do while loop with condition currentNode does not equal null    
     do {
-      // check if currentNode value is equal to target
+      // return true if currentNode value is equal to target
       if (currentNode.value === target) {
         return true;
       }
       // else reassign currentNode to next
       currentNode = currentNode.next;
     } while (currentNode);
-    // return false if not found
+
+    // target was not found
     return false;
   };
   
-  // for the new test created
+  // new function for new test
 
   list.addToBody = function(valueToAdd, valueToAddOnto) {
     var currentNode = list.head;
     // do while loop with condition as currentNode does not equal null    
     do {
       // check if currentNode value is equal to valuetoadd
-      if (currentNode.value === valueToAddOnto) {
-        // create new node
-        var newNode = new Node(valueToAdd);
         // set the new node to reference the node after the current node
+        // update currentnode.next reference the new node
+      if (currentNode.value === valueToAddOnto) {
+        var newNode = new Node(valueToAdd);
         newNode.next = currentNode.next;
-        // have currentnode.next reference the new node
         currentNode.next = newNode;
       }
       // else reassign currentNode to next
       currentNode = currentNode.next;
     } while (currentNode);
   };
+
   return list;
 };
 

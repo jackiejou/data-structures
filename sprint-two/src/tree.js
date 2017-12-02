@@ -11,22 +11,19 @@ var Tree = function(value) {
 var treeMethods = {};
 
 treeMethods.addChild = function(value) {
-  // create a new instance of a tree
-  // push new instance into the children array of the current node
+  // create a new instance of a tree and push it into the children array of the current node
   this.children.push(Tree(value));
 };
 
 treeMethods.contains = function(target) {
   // check if current node value is equal to the target
   if (this.value === target) {
-    // return true if yes
     return true;
   }
-  // else check if children length > 0
+  // check if the children property exists
+    // loop through each child and recursively call this function
   if (this.children.length > 0) {
-    // loop through each of the children
     for (var i = 0; i < this.children.length; i++) {
-      // if so, recursively call this function
       if (this.children[i].contains(target)) {
         return true;
       }
@@ -39,17 +36,16 @@ treeMethods.contains = function(target) {
 // new function for new test below
 
 treeMethods.removeChild = function(value) {
-  // check if children length > 0
+  // check if children property exists
+    // loop through each child and check if values match
+        // remove if found
+    // else recursively call this function
   if (this.children.length > 0) {
-    // loop through each of the children
     for (var i = 0; i < this.children.length; i++) {
-      // if so, recursively call this function
       if (this.children[i].value === value) {
         this.children.splice(i, 1);
       } else {
-        if (this.children[i]) {
-          this.children[i].removeChild(value);
-        }
+        this.children[i].removeChild(value);
       }
     }    
   } 

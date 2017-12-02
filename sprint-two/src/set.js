@@ -9,9 +9,10 @@ var setPrototype = {};
 
 setPrototype.add = function(item) {
   var index = getIndexBelowMaxForKey(item, this.limit);
-  // check if item exists in storage 
-  if (!this.storage[index]) {
+
+  // check if item exists in storage
     // if not, put item in storage
+  if (!this.storage[index]) {
     this.storage[index] = item;
   }
 };
@@ -28,7 +29,7 @@ setPrototype.remove = function(item) {
   delete this.storage[index];
 };
 
-// new test
+// new function for new test
 
 setPrototype.getSetList = function() {
   var result = [];
