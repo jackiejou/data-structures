@@ -1,45 +1,45 @@
 var Set = function() {
   var set = Object.create(setPrototype);  
-  set.limit = 10;
-  set.storage = LimitedArray(set.limit);
+  set._limit = 10;
+  set._storage = LimitedArray(set.limit);
   return set;
 };
 
 var setPrototype = {};
 
 setPrototype.add = function(item) {
-  var index = getIndexBelowMaxForKey(item, this.limit);
-
+  var index = getIndexBelowMaxForKey(item, this._limit);
+  var bucket = this._storage.get(index);
   // check if item exists in storage
     // if not, put item in storage
-  if (!this.storage[index]) {
-    this.storage[index] = item;
+  if (!bucket) {
+    this._storage.set(index, item);
   }
 };
 
 setPrototype.contains = function(item) {
-  var index = getIndexBelowMaxForKey(item, this.limit);
+  var index = getIndexBelowMaxForKey(item, this._limit);
+  var bucket = this._storage.get(index);
   // check if the item exists in storage at hashed index
-  return this.storage[index] === item;
+  return bucket === item;
 };
 
 setPrototype.remove = function(item) {
   // get index of item in storage and remove it
-  var index = getIndexBelowMaxForKey(item, this.limit);
-  delete this.storage[index];
+  var index = getIndexBelowMaxForKey(item, this._limit);
+  this._storage.set(index, undefined);
 };
 
 // new function for new test
 
 setPrototype.getSetList = function() {
+  // return an array of all values in the set
   var result = [];
-  var arrayOfKeys = Object.keys(this.storage); 
-  for (var i = 0; i < arrayOfKeys.length; i++) {
-    var value = this.storage[arrayOfKeys[i]];
-    if (typeof value === 'string') {
-      result.push(value);
+  this._storage.each(function(bucket) {
+    if (bucket) {
+      result.push(bucket);
     }
-  }
+  });
   return result;
 };
 
