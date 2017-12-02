@@ -3,6 +3,7 @@
 var HashTable = function() {
   this._limit = 8;
   this._storage = LimitedArray(this._limit);
+  this._size = 0;
 };
 
 HashTable.prototype.insert = function(k, v) {
@@ -23,6 +24,28 @@ HashTable.prototype.insert = function(k, v) {
     var arr = [];
     arr.push([k, v]);
     this._storage[index] = arr;
+  }
+
+  this._size++;
+  if (this._size / this._limit > 0.75) {
+    this.doubleSize();
+  }
+};
+
+HashTable.prototype.doubleSize = function() {
+  this._limit *= 2;
+  // loop through all the buckets in the storage
+    // push tuples found inside of the tuples list
+  var arrayOfBuckets = Object.values(this._storage).filter(item => Array.isArray(item));
+  // resize the storage and size
+  this._storage = LimitedArray(this._limit);
+  this._size = 0;
+  // loop through tuples list
+    // call insert for each tuple
+  for (var i = 0; i < arrayOfBuckets.length; i++) {
+    for (var j = 0; j < arrayOfBuckets[i].length; j++) {
+      this.insert(arrayOfBuckets[i][j][0], arrayOfBuckets[i][j][1]);
+    }
   }
 };
 
@@ -54,6 +77,20 @@ HashTable.prototype.remove = function(k) {
       }
     }
   }
+};
+
+// new test
+
+HashTable.prototype.contains = function(k) {
+  var index = getIndexBelowMaxForKey(k, this._limit);
+  if (this._storage[index]) {
+    for (var i = 0; i < this._storage[index].length; i++) {
+      if (this._storage[index][i][0] === k) {
+        return true;
+      }
+    }
+  }
+  return false;
 };
 
 

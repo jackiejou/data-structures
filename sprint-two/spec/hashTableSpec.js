@@ -47,8 +47,17 @@ describe('hashTable', function() {
     window.getIndexBelowMaxForKey = oldHashFunction;
   });
 
+  // new test
+
+  it('should check if a key was inserted', function() {
+    hashTable.insert('Steven', 'Tyler');
+    hashTable.insert('Bob', 'Marker');
+    expect(hashTable.contains('Bob')).to.equal(true);
+    expect(hashTable.contains('Steve')).to.equal(false);
+  });
+
   // (Advanced! Remove the extra "x" when you want the following tests to run)
-  xit ('should double in size when needed', function() {
+  it ('should double in size when needed', function() {
     _.each(people, function(person) {
       var firstName = person[0];
       var lastName = person[1];
