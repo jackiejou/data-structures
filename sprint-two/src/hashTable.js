@@ -89,6 +89,34 @@ HashTable.prototype.remove = function(k) {
       }
     }
   }
+  this._size--;
+  // halvesize check
+  if (this._size / this._limit < 0.25) {
+    this.halveSize();
+  }
+};
+
+HashTable.prototype.halveSize = function() {
+  // get all tuples in the hashtable
+  var tuples = [];
+  this._storage.each(function(bucket) {
+    if (bucket) {
+      for (var i = 0; i < bucket.length; i++) {
+        tuples.push(bucket[i]);
+      }
+    }
+  });
+
+  // update properties
+  this._limit /= 2;
+  this._storage = LimitedArray(this._limit);
+  this._size = 0;
+
+  // iterate through the tuples
+    // insert each tuple into the new hash table
+  for (var j = 0; j < tuples.length; j++) {
+    this.insert(tuples[j][0], tuples[j][1]);
+  }
 };
 
 // new function for new test
