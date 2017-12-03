@@ -37,29 +37,11 @@ BinarySearchTree.prototype.insert = function(value) {
 };
 
 BinarySearchTree.prototype.depthFirstLog = function(callback) {
-  // run callback on this value
-  this.value = callback(this.value);
-  // if left exists, run recursion on this.left node
-  if (this.left) {
-    this.left.depthFirstLog(callback);
-  }
-  // if right exists run recursion on this.right node
-  if (this.right) {
-    this.right.depthFirstLog(callback);
-  }
+  // run callback on each node's value
+  this.traverse(function(node) {
+    node.value = callback(node.value);
+  });
 };
-
-// BinarySearchTree.prototype.rebalance = function() {
-//   var nodes = [];
-//   var rootNode = this;
-//   // traverse up the tree until the root node is reached
-//   while (this.parent) {
-//     rootNode = this.parent;
-//   }
-//   nodes.push(this);
-
-
-// };
 
 BinarySearchTree.prototype.traverse = function(callback) {
   callback(this);
@@ -83,6 +65,68 @@ BinarySearchTree.prototype.contains = function(value) {
     }
   });
   return result;
+};
+
+// Work in progress functions below
+
+BinarySearchTree.prototype.rebalance = function() {
+  var nodes = getAndSortNodes;
+  var nodesByDepth = this.sortNodesByDepth(nodes);
+  var orderToAddNodes = [];
+  var depthCounter = 0;
+  for (var i = 0; i < nodesByDepth.length; i++) {
+    if (nodesByDepth[i] && !orderToAddNodes[i]) {
+      orderToAddNodes[depthCounter] = [nodesByDepth[i]];
+      depthCounter = 0;
+    } else if (nodesByDepth[i] && orderToAddNodes[i]) {
+      orderToAddNodes[depthCounter].push(nodesByDepth[i]);
+      depthCounter = 0;
+    } else if (!nodesByDepth[i]) {
+      depthCounter++;
+    }  
+  }
+  orderToAddNodes = _.flatten(orderToAddNodes);
+};
+
+BinarySearchTree.prototype.getAndSortNodes = function() {
+  var nodes = [];
+  this.traverse(function(node) {
+    nodes.push(node);
+  });
+  nodes.sort((a, b) => a - b);
+  return nodes;
+};
+
+BinarySearchTree.prototype.sortNodesByDepth = function(nodes, depth) {
+  var nodesByDepth = [];
+  var indexOfMidNode = Math.floor(nodes.length / 2);
+  var midNode = nodes[indexOfMidNode];
+  var leftNodes = nodes.slice(0, indexOfMidNode);
+  var rightNodes = nodes.slice(indexOfMidNode + 1);
+  
+  if (!depth) {
+    depth = 0;
+  }
+  if (!nodesByDepth[depth]) {
+    nodesByDepth[depth] = [midNode];
+  } else {
+    nodesByDepth[depth].push(midNode);
+  }
+  if (leftNodes.length) {
+    nodesByDepth = nodesByDepth.concat(BinarySearchTree.prototype.sortNodesByDepth(leftNodes, depth + 1));
+  }
+  if (rightNodes.length) {
+    nodesByDepth = nodesByDepth.concat(BinarySearchTree.prototype.sortNodesByDepth(leftNodes, depth + 1));
+  }
+  return nodesByDepth;
+};
+
+BinarySearchTree.prototype.getRootNode = function(node) {
+  var rootNode = node;
+  while (node.parent) {
+    rootNode = node.parent;
+  }
+  return rootNode;
 };
 
 
