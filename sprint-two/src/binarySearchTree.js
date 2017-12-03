@@ -32,7 +32,6 @@ BinarySearchTree.prototype.insert = function(value) {
   this.totalNodes++;
   var idealHeight = Math.floor(Math.log2(this.totalNodes));
   // if (this.right && this.right.location > idealHeight || this.left && this.left.location > idealHeight) {
-  //   debugger;
   //   var rootNode = this.getRootNode();
   //   rootNode.rebalance();
   // }
@@ -145,8 +144,8 @@ BinarySearchTree.prototype.getDepthOfNodes = function(nodes, depth) {
 
 BinarySearchTree.prototype.getRootNode = function() {
   var rootNode = this;
-  while (this.parent) {
-    rootNode = this.parent;
+  while (rootNode) {
+    rootNode = rootNode.parent;
   }
   return rootNode;
 };
